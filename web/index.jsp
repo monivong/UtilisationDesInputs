@@ -48,11 +48,13 @@
                         "location.protocol = " + location.protocol + "\n" + 
                         "location.search = " + location.search);
                 //location.assign("http://www.google.ca");
-                location.replace("http://www.facebook.com");
+                //location.replace("http://www.facebook.com");
+                // assign() et replace() sont pas mal équivalant
 // Fin des BOM                
                 // button
                 document.getElementsByName("inputButton")[0].addEventListener("click", function() {
                    alert("Vous avez cliqué sur le bouton !"); 
+                   location.assign("./controleurFrontal?action=inputButton&value= '" + document.getElementsByName("inputButton")[0].value + "'");
                 });
                 // checkbox
                 document.getElementsByName("inputCheckbox")[0].addEventListener("click", function() {
@@ -70,8 +72,9 @@
     </head>
     <body>
 <%
-        if( request.getParameter("message") != null )
-            out.println("<h3>" + request.getParameter("message") +"</h3>");
+        if( request.getAttribute("message") != null ) {
+            out.println("<div><h3>" + request.getAttribute("message") +"</h3></div>");
+        }
 %>        
         <input type="button" name="inputButton" value="Je suis un bouton"/><br/>
         
